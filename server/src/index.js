@@ -1,23 +1,34 @@
 // Imports
+const path = require("path");
 const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
 
-// Declaring constants
-const API_PORT = 9090 || process.env.API_PORT;
-
-// Initializing express
+// Initialize express and mongoose
 const app = express();
+const port = process.env.PORT || 5010;
 
-// Declaring middleware
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.get("/", (req, res) => {
-  res.send("Okay we're working!");
+// Middleware Setup - Set up response headers
+app.use((request, response, next) => {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
 });
 
-app.listen(3000, () => {
-  console.log("started server on port 3000");
+// Middleware Setup - Connecting to the react frontend
+app.use(express.static(path.join(__dirname, "../../client/build")));
+
+// Catch all route to serve the index.html file
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
+
+// Middleware Setup - Error handlers
+app.use((request, response) => {
+  response.status(404).json({ message: "Route Not Found" });
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });

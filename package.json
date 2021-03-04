@@ -1,0 +1,22 @@
+{
+  "name": "course-manager",
+  "version": "1.0.0",
+  "description": "A simple web app for managing courses for employees",
+  "main": "server/src/index.js",
+  "scripts": {
+    "start": "cd server && npm install && npm start",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DangaRanga/course-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DangaRanga/course-manager/issues"
+  },
+  "homepage": "https://github.com/DangaRanga/course-manager#readme"
+}
