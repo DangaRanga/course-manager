@@ -3,16 +3,22 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 
+require("dotenv").config();
+
 // Declare constants
 const MONGO_URI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5010;
 
 // Initialize express and mongoose
 const app = express();
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+
+mongoose
+  .connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Successfuly connected to MongoDB"))
+  .catch((error) => console.log("error"));
 
 // Middleware Setup - Response headers
 app.use((request, response, next) => {
@@ -37,6 +43,6 @@ app.use((request, response) => {
   response.status(404).json({ message: "Route Not Found" });
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
