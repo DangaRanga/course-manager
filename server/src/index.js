@@ -1,12 +1,20 @@
 // Imports
 const path = require("path");
 const express = require("express");
+const mongoose = require("mongoose");
+
+// Declare constants
+const MONGO_URI = process.env.MONGO_URI;
+const PORT = process.env.PORT || 5010;
 
 // Initialize express and mongoose
 const app = express();
-const port = process.env.PORT || 5010;
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-// Middleware Setup - Set up response headers
+// Middleware Setup - Response headers
 app.use((request, response, next) => {
   response.header("Access-Control-Allow-Origin", "*");
   response.header(
