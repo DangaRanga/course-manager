@@ -1,7 +1,10 @@
 // Imports
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const Schema = mongoose.Schema;
+const jwtSecret = process.env.SECRET_KEY;
 
 const EmployeeSchema = new Schema({
   firstName: {
@@ -19,8 +22,9 @@ const EmployeeSchema = new Schema({
     required: true,
   },
 
-  salt: {
+  password: {
     type: String,
+    required: true,
   },
 
   roles: {
@@ -48,6 +52,17 @@ const EmployeeSchema = new Schema({
   },
 });
 
+EmployeeSchema.pre("save", async function (next) {
+  const employee = this;
+  const hash = await bcrypt.hash(this.password, 12);
+
+  this.password = hash;
+  next();
+});
+
+EmployeeSchema.methods.validatePassword = async function (password) {
+  const isValidPassword = await bcrypt.compare(password, this.passwod);
+};
 const Employee = mongoose.model("Employee", EmployeeSchema);
 
 module.exports = Employee;
