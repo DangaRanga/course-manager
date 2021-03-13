@@ -6,19 +6,18 @@ const Employee = require("../models/employee.models");
 
 const EmployeeController = {
   async registerEmployee(request, response) {
-    // Check if the fields are null or empty
+    // Destructure the request
     const { firstName, lastName, email, password, department } = request.body;
-    const fields = [firstName, lastName, email, password, department];
-    console.log(fields);
-    try {
-      const isEmpty = emptyRequestHandler(request, fields);
-      console.log(isEmpty);
-      if (isEmpty) {
-        return response
-          .status(400)
-          .json({ message: "Not all fields have been set" });
-      }
 
+    // Check if the request fields are empty
+    const fields = [firstName, lastName, email, password, department];
+    const isEmpty = emptyRequestHandler(request, fields);
+    if (isEmpty) {
+      return response
+        .status(400)
+        .json({ message: "Not all fields have been set" });
+    }
+    try {
       // Check if the user already exists
       const userExists = await Employee.findOne({ email: email });
       if (userExists) {
@@ -31,6 +30,7 @@ const EmployeeController = {
       const salt = await bcrypt.genSalt();
       const passwordHash = await bcrypt.hash(password, salt);
 
+      // Create and save the employee to the database
       const newEmployee = new Employee({
         firstName: firstName,
         lastName: lastName,
@@ -39,11 +39,15 @@ const EmployeeController = {
         department: department,
       });
 
-      newEmployee.save((error) => {
-        if (error) {
-          return response.json({ error: "Something went wrong" });
+      newEmployee.save((err) => {
+        if (err) {
+          return response
+            .status(400)
+            .json({ err: `Error saving employee ${err.message}` });
         } else {
-          return response.json({ success: "Employee sucessfully created " });
+          return response
+            .status(201)
+            .json({ success: "Employee sucessfully created " });
         }
       });
     } catch (err) {
@@ -56,32 +60,38 @@ const EmployeeController = {
     const { email, password } = request.body;
 
     // Check if the fields are empty
-    if (!email || !password)
+    const isEmpty = emptyRequestHandler(request, [email, password]);
+    if (isEmpty) {
       return res.status(400).json({ msg: "Not all fields have been entered." });
+    }
 
     // Check if the user exists
-    const user = await Employee.findOne({ email: email });
+    try {
+      const user = await Employee.findOne({ email: email });
 
-    if (!user) {
-      return response
-        .status(400)
-        .json({ message: "No user exists with the email entered" });
-    }
+      if (!user) {
+        return response
+          .status(400)
+          .json({ message: "No user exists with the email entered" });
+      }
 
-    // Check the password
-    const passwordMatch = await bcrypt.compare(password, user.password);
+      // Check the password
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (!passwordMatch) {
+        return response.status(400).json({
+          message: "Invalid credentials",
+        });
+      }
 
-    if (!passwordMatch) {
-      return response.status(400).json({
-        message: "Invalid credentials",
+      // Create the JWT
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      return response.status(201).json({
+        auth_token: token,
+        user: { id: user._id, email: user.email },
       });
+    } catch (err) {
+      return response.status(500).json({ error: err.message });
     }
-
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    response.json({
-      auth_token: token,
-      user: { id: user._id, email: user.email },
-    });
   },
 
   async checkTokenValidity(request, response) {
