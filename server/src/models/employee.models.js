@@ -27,14 +27,6 @@ const EmployeeSchema = new Schema({
     required: true,
   },
 
-  roles: {
-    type: {
-      type: String,
-      enum: ["employee", "admin"],
-    },
-    default: "employee",
-  },
-
   department: {
     type: String,
     enum: ["design", "development", "photography", "video", "social media"],

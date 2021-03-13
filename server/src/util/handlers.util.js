@@ -3,7 +3,7 @@
  * @param {*} err
  * @param {*} data
  * @param {function} errorHandler
- * @param {*} response
+ * @param {Response} response
  */
 function queryHandler(err, data, errorHandler, response) {
   if (err) {
@@ -13,16 +13,26 @@ function queryHandler(err, data, errorHandler, response) {
   }
 }
 
-function emptyRequestHandler(request, response) {
-  const isEmpty = !Object.values(request.body).some(
-    (value) => value !== null && value !== ""
-  );
-
-  if (isEmpty) {
-    response.status(400).json({ message: "Not all fields have been set" });
+/**
+ *
+ * @param {Request} request
+ * @param {Array} fields
+ */
+function emptyRequestHandler(request, fields) {
+  for (let key in request.body) {
+    if (request.body.hasOwnProperty(key)) {
+      break;
+    }
   }
+
+  const hasEmptyField = fields.some((field) => {
+    return field === null;
+  });
+
+  return hasEmptyField;
 }
 
 module.exports = {
   queryHandler: queryHandler,
+  emptyRequestHandler: emptyRequestHandler,
 };

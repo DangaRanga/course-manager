@@ -3,6 +3,11 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bodyParser = require("body-parser");
+
+// User package imports
+const employeeRouter = require("./routes/employee.routes");
+const courseRouter = require("./routes/course.routes");
 
 require("dotenv").config();
 
@@ -12,6 +17,7 @@ const PORT = process.env.PORT || 5010;
 
 // Initialize express and mongoose
 const app = express();
+app.use(bodyParser.json());
 app.use(cors());
 
 mongoose
@@ -21,6 +27,9 @@ mongoose
   })
   .then(() => console.log("Successfuly connected to MongoDB"))
   .catch((error) => console.log("error"));
+
+app.use("/api/employee", employeeRouter);
+app.use("/api/course", courseRouter);
 
 // Connect to the react frontend
 app.use(express.static(path.join(__dirname, "../../client/build")));
