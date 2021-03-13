@@ -14,11 +14,6 @@ const PORT = process.env.PORT || 5010;
 // Initialize express and mongoose
 const app = express();
 app.use(cors());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
 
 mongoose
   .connect(MONGO_URI, {
@@ -27,16 +22,6 @@ mongoose
   })
   .then(() => console.log("Successfuly connected to MongoDB"))
   .catch((error) => console.log("error"));
-
-// Set up API endpoints
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    rootValue: resolvers,
-    igraphql: true,
-  })
-);
 
 // Connect to the react frontend
 app.use(express.static(path.join(__dirname, "../../client/build")));
