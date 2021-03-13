@@ -1,6 +1,8 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
 // Import Views/Pages
 import Auth from "../../views/Auth/Auth";
 import Profile from "../../views/Profile/Profile";
@@ -11,11 +13,11 @@ function RouteClient() {
   return (
     <Switch>
       <Route path="/auth" exact component={Auth}></Route>
-      <Route path="/catalogue">
+      <ProtectedRoute path="/catalogue">
         <Redirect to="/courses"></Redirect>
-      </Route>
-      <Route path="/courses" exact component={Catalogue}></Route>
-      <Route path="/course/:cid" exact component={Course}></Route>
+      </ProtectedRoute>
+      <ProtectedRoute path="/courses" exact component={Catalogue} />
+      <ProtectedRoute path="/course/:cid" exact component={Course} />
     </Switch>
   );
 }
