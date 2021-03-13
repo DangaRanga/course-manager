@@ -1,18 +1,22 @@
+// Node Module imports
 const express = require("express");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 
-const { queryHandler } = require("../util/util");
-const Employee = require("../models/employee");
+const Employee = require("../models/employee.models");
+const {
+  registerEmployee,
+  loginEmployee,
+} = require("../controllers/employee.controllers");
+
+const { queryHandler } = require("../util/handlers.util");
 
 const employeeRouter = express.Router();
 
-employeeRouter.post("/register", async (request, response, next) => {});
+employeeRouter.post("/register", async (request, response, next) => {
+  registerEmployee(request, response);
+});
 
 employeeRouter.post("/login", (request, response, next) => {
-  // Extract credentials from request
-  const email = request.body.email;
-  const password = request.body.password;
-
-  // Check if the user exists
+  loginEmployee(request, response);
 });
+
+employeeRouter.post("/checkToken", async (request, response, next) => {});

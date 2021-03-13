@@ -13,6 +13,16 @@ function queryHandler(err, data, errorHandler, response) {
   }
 }
 
+function emptyRequestHandler(request, response) {
+  const isEmpty = !Object.values(request.body).some(
+    (value) => value !== null && value !== ""
+  );
+
+  if (isEmpty) {
+    response.status(400).json({ message: "Not all fields have been set" });
+  }
+}
+
 module.exports = {
   queryHandler: queryHandler,
 };
