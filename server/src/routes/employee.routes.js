@@ -19,4 +19,6 @@ employeeRouter.post("/login", (request, response, next) => {
   loginEmployee(request, response);
 });
 
-employeeRouter.post("/checkToken", async (request, response, next) => {});
+employeeRouter.post("/checkToken", async (request, response, next) => {
+  checkTokenValidity(request, response);
+});

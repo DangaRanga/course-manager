@@ -109,4 +109,5 @@ function deleteEmployee() {}
 module.exports = {
   registerEmployee: registerEmployee,
   loginEmployee: loginEmployee,
+  checkTokenValidity: checkTokenValidity,
 };
