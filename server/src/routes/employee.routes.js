@@ -9,6 +9,9 @@ const { queryHandler } = require("../util/handlers.util");
 const employeeRouter = express.Router();
 
 employeeRouter.get("/", (request, response, next) => {
+  EmployeeController.getEmployee(request, response);
+});
+employeeRouter.get("/all", (request, response, next) => {
   EmployeeController.getEmployees(request, response, next);
 });
 

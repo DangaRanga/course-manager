@@ -7,7 +7,7 @@ function ProtectedRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) => {
-        let token = localStorage.getItem("auth_token");
+        let token = localStorage.getItem("auth-token");
         if (token !== null) {
           return <Component {...props} />;
         } else {

@@ -84,7 +84,9 @@ const EmployeeController = {
       }
 
       // Create the JWT
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: 900,
+      });
       return response.status(200).json({
         auth_token: token,
         user: { id: user._id, email: user.email },
@@ -95,8 +97,8 @@ const EmployeeController = {
   },
 
   async checkTokenValidity(request, response) {
-    // Check for the token
     try {
+      // Check for the token
       const token = request.header("x-access-token");
       if (!token) {
         return response.status(401).json({ message: "Token missing" });
@@ -123,6 +125,8 @@ const EmployeeController = {
     }
   },
 
+  async getEmployee(auth, request, response) {},
+
   getEmployees(request, response, next) {
     Employee.find((err, employees) =>
       queryHandler(err, employees, next, response)
@@ -130,6 +134,8 @@ const EmployeeController = {
   },
 
   deleteEmployee() {},
+
+  updateEmployee(request, response) {},
 };
 
 module.exports = EmployeeController;

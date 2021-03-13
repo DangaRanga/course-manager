@@ -18,6 +18,7 @@ function RouteClient() {
       </ProtectedRoute>
       <ProtectedRoute path="/courses" exact component={Catalogue} />
       <ProtectedRoute path="/course/:cid" exact component={Course} />
+      <ProtectedRoute path="/" exact component={Profile} />
     </Switch>
   );
 }
