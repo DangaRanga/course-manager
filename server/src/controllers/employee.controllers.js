@@ -78,14 +78,14 @@ const EmployeeController = {
       // Check the password
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch) {
-        return response.status(400).json({
+        return response.status(401).json({
           message: "Invalid credentials",
         });
       }
 
       // Create the JWT
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-      return response.status(201).json({
+      return response.status(200).json({
         auth_token: token,
         user: { id: user._id, email: user.email },
       });
@@ -96,26 +96,31 @@ const EmployeeController = {
 
   async checkTokenValidity(request, response) {
     // Check for the token
-    const token = request.header("x-access-token");
-    if (!token) {
-      return response.json({ message: "Token missing" });
+    try {
+      const token = request.header("x-access-token");
+      if (!token) {
+        return response.status(401).json({ message: "Token missing" });
+      }
+
+      // Check if the token is still valid
+      const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
+      if (!verifiedUser) {
+        return response
+          .status(401)
+          .json({ message: "Token is no longer valid" });
+      }
+
+      // Check if the token belongs to the user
+      const employee = await Employee.findById(verifiedUser.id);
+
+      if (!employee) {
+        return response.status(401).json({ message: "Invalid token for user" });
+      }
+
+      return response.status(200).json({ isValidToken: true });
+    } catch (err) {
+      return response.status(500).json({ error: err.message });
     }
-
-    // Check if the token is still valid
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-
-    if (!verified) {
-      return response.json({ message: "Token is no longer valid" });
-    }
-
-    // Check if the token belongs to the user
-    const user = await User.findById(verified.id);
-
-    if (!user) {
-      return response.json({ message: "Invalid token for user" });
-    }
-
-    return response.json(true);
   },
 
   getEmployees(request, response, next) {
