@@ -1,7 +1,7 @@
 #form-container {
   box-sizing: border-box;
   background: #ffffff;
-  width: 60vh;
+  width: 32%;
   padding: 50px;
   border: 2px solid #cdcdcd;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -23,8 +23,20 @@
   padding: 12px 15px;
   width: 100%;
   border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
 }
 
+#form-container input:focus {
+  border: solid 1px #399cdf;
+  box-shadow: 0 0 5px #399cdf;
+}
+#form-container h1 {
+  margin-bottom: 10px;
+}
 .form-btn {
   width: 40%;
   padding: 14px 8px;
@@ -49,4 +61,25 @@
 #form-toggle:hover {
   cursor: pointer;
   color: #075b94;
+}
+
+#form-img {
+  height: 10vh;
+}
+
+@media screen and (max-width: 500px) {
+  #form-container {
+    width: 100%;
+  }
+
+  #auth-toggle,
+  .form-btn {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  #form-container {
+    width: 90%;
+  }
 }

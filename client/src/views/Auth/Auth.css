@@ -6,3 +6,9 @@
   align-items: center;
   justify-content: center;
 }
+
+@media screen and (max-width: 850px) {
+  #auth-page {
+    height: 140vh;
+  }
+}

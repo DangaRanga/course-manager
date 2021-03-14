@@ -1,6 +1,10 @@
+// React imports
 import React, { useState } from "react";
 
+// CSS and image imports
+import book from "../../assets/icons/Book.svg";
 import "./Form.css";
+
 function Form() {
   const [formState, setFormState] = useState({
     login: false,
@@ -12,6 +16,7 @@ function Form() {
   });
   return (
     <div id="form-container">
+      <img src={book} alt="book" id="form-img"></img>
       <h1>{formState.login ? "Login" : "Sign Up"} </h1>
       <form>
         <input
