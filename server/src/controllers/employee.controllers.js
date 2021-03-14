@@ -88,7 +88,7 @@ const EmployeeController = {
         expiresIn: 900,
       });
       return response.status(200).json({
-        auth_token: token,
+        authToken: token,
         user: { id: user._id, email: user.email },
       });
     } catch (err) {
@@ -101,22 +101,26 @@ const EmployeeController = {
       // Check for the token
       const token = request.header("x-access-token");
       if (!token) {
-        return response.status(401).json({ message: "Token missing" });
+        return response.json({
+          message: "Token is missing",
+          isValidToken: false,
+        });
       }
 
       // Check if the token is still valid
       const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
       if (!verifiedUser) {
-        return response
-          .status(401)
-          .json({ message: "Token is no longer valid" });
+        return response.json({
+          message: "Token is invalid",
+          isValidToken: false,
+        });
       }
 
       // Check if the token belongs to the user
       const employee = await Employee.findById(verifiedUser.id);
 
       if (!employee) {
-        return response.status(401).json({ message: "Invalid token for user" });
+        return response.json({ isValidToken: false });
       }
 
       return response.status(200).json({ isValidToken: true });

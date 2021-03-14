@@ -31,8 +31,8 @@
 }
 
 #form-container input:focus {
-  border: solid 1px #399cdf;
-  box-shadow: 0 0 5px #399cdf;
+  border: solid 1px #4fa3db;
+  box-shadow: 0 0 5px #4fa3db;
   outline: none;
 }
 #form-container h1 {

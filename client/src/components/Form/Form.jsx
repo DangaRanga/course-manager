@@ -1,24 +1,44 @@
 // React imports
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+
+// User module imports
+import { UserContext } from "../../context/UserContext";
+import { registerEmployee, loginEmployee } from "../../util/auth-handler";
 
 // CSS and image imports
 import book from "../../assets/icons/Book.svg";
 import "./Form.css";
 
 function Form() {
+  const { setUserData } = useContext(UserContext);
+  const history = useHistory();
   const [formState, setFormState] = useState({
-    login: false,
+    login: true,
     firstName: "",
     lastName: "",
     department: "",
     email: "",
     password: "",
   });
+
+  const submit = async (e) => {
+    // Update the user context on submit
+    let userData = {};
+    if (formState.login) {
+      userData = loginEmployee(e, formState);
+    } else {
+      userData = registerEmployee(e, formState);
+    }
+    setUserData(userData);
+    history.push("/");
+  };
+
   return (
     <div id="form-container">
       <img src={book} alt="book" id="form-img"></img>
       <h1>{formState.login ? "Login" : "Sign Up"} </h1>
-      <form>
+      <form onSubmit={submit}>
         <input
           value={formState.email}
           onChange={(e) =>
@@ -72,7 +92,7 @@ function Form() {
           placeholder="Password"
         />
         <p id="auth-toggle">
-          Don't have an account?{" "}
+          {formState.login ? "Don't have" : "Already have"} an account?{" "}
           <span
             id="form-toggle"
             onClick={(e) =>
@@ -82,7 +102,7 @@ function Form() {
               })
             }
           >
-            Sign {formState.login ? "in" : "up"}
+            Sign {!formState.login ? "in" : "up"}
           </span>
         </p>
         <button className="btn form-btn">

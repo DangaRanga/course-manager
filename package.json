@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/DangaRanga/course-manager/issues"
   },
-  "homepage": "https://github.com/DangaRanga/course-manager#readme"
+  "homepage": "https://github.com/DangaRanga/course-manager#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
