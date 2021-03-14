@@ -26,16 +26,12 @@ const EmployeeController = {
         });
       }
 
-      // Create the password hash
-      const salt = await bcrypt.genSalt();
-      const passwordHash = await bcrypt.hash(password, salt);
-
       // Create and save the employee to the database
       const newEmployee = new Employee({
         firstName: firstName,
         lastName: lastName,
         email: email,
-        password: passwordHash,
+        password: password,
         department: department,
       });
 

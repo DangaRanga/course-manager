@@ -44,6 +44,16 @@ const EmployeeSchema = new Schema({
   },
 });
 
+EmployeeSchema.pre("save", async function () {
+  // Create the password hash
+  if (this.isModified("password")) {
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(this.password, salt);
+    console.log(passwordHash);
+    this.password = passwordHash;
+  }
+});
+
 const Employee = mongoose.model("Employee", EmployeeSchema);
 
 module.exports = Employee;

@@ -26,9 +26,9 @@ function Form() {
     // Update the user context on submit
     let userData = {};
     if (formState.login) {
-      userData = loginEmployee(e, formState);
+      userData = await loginEmployee(e, formState);
     } else {
-      userData = registerEmployee(e, formState);
+      userData = await registerEmployee(e, formState);
     }
     setUserData(userData);
     history.push("/");
