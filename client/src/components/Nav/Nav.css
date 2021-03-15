@@ -20,6 +20,11 @@ nav {
   width: 22%;
 }
 
+.nav-items li {
+  font-weight: bold;
+  transition: all 0.19s ease-in-out;
+}
+
 .nav-items a {
   color: #000000;
 }

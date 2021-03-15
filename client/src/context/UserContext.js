@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
+import { Redirect, Route } from "react-router-dom";
 import axios from "axios";
 
 export const UserContext = createContext();
@@ -19,13 +20,20 @@ function EmployeeContext({ children }) {
       }
 
       // Check if the token stored is valid
-      const tokenResponse = await axios.post(
-        "http://localhost:5010/api/employee/checkToken",
-        null,
-        {
-          headers: { "x-access-token": token },
-        }
-      );
+      let tokenResponse = {};
+      try {
+        tokenResponse = await axios.post(
+          "http://localhost:5010/api/employee/checkToken",
+          null,
+          {
+            headers: { "x-access-token": token },
+          }
+        );
+      } catch (error) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+        return <Redirect to="/auth"></Redirect>;
+      }
 
       // Retrieve user if the token is valid
       let userResponse = {};

@@ -1,0 +1,21 @@
+.quantity-card-container {
+  width: 20em;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  box-sizing: border-box;
+  border-radius: 7px;
+  margin: 0 30px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.quantity-card-container h3 {
+  color: #807b7b;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.quantity-card-container h1 {
+  font-size: 3em;
+  font-weight: bold;
+}

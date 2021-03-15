@@ -1,0 +1,37 @@
+/* Rectangle 8 */
+
+.course-card-container {
+  background: #ffffff;
+
+  border: 1px solid #d0d0d0;
+  box-sizing: border-box;
+  border-radius: 7px;
+  padding: 20px 30px;
+  margin-bottom: 25px;
+}
+
+.course-flex-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+}
+
+.course-btn {
+  border-radius: 5px;
+  font-size: 1.1em;
+  border: none;
+  background: #6da0bc;
+  color: #ffffff;
+  padding: 12px 25px;
+  transition: all 0.25s ease-in-out;
+}
+
+.course-details p {
+  margin: 12px 0px;
+  font-weight: bold;
+  color: #807b7b;
+}
+
+.course-btn:hover {
+  background: #4a7e9b;
+}

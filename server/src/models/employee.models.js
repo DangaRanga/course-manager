@@ -33,6 +33,11 @@ const EmployeeSchema = new Schema({
     required: true,
   },
 
+  coursesInProgress: {
+    type: [String],
+    default: [],
+  },
+
   coursesCompleted: {
     type: [String],
     default: [],
