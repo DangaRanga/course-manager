@@ -1,0 +1,39 @@
+/* Rectangle 22 */
+
+#courses-sidepanel {
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 7px;
+  height: 100vh;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+#courses-sidepanel ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#courses-sidepanel h1 {
+  margin-bottom: 10px;
+}
+#courses-sidepanel li {
+  margin: 10px 0;
+  transition: all 0.19s ease-in-out;
+}
+
+#courses-sidepanel li:hover {
+  color: #016fb9;
+  cursor: pointer;
+}
+
+#category-separator {
+  border: none;
+  border-top: 1px solid #d0cde1;
+  width: 80%;
+  margin: 20px 0;
+}

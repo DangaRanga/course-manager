@@ -1,0 +1,9 @@
+#course-catalogue-container {
+  display: flex;
+  margin: 45px 30px;
+}
+
+#catalogue-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+}

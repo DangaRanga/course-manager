@@ -1,0 +1,38 @@
+.catalogue-card-wrapper {
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 7px;
+  margin: 20px 0px;
+  margin-right: 20px;
+}
+
+.catalogue-card-container {
+  padding: 0 20px;
+  padding-top: 20px;
+}
+.catalogue-course-details p {
+  color: #807b7b;
+  width: 80%;
+  margin: 15px 0;
+}
+
+.course-desc {
+  color: #000000;
+}
+
+.catalogue-separator {
+  border: none;
+  border-top: 1px solid #d0cde1;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn-flex-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.btn-flex-wrapper button {
+  margin-top: 0;
+  margin: 10px 0;
+  padding: 10px 40px;
+}

@@ -1,4 +1,5 @@
-#profile-content-container {
+#profile-content-container,
+#course-catalogue-container {
   margin: 45px 90px;
 }
 

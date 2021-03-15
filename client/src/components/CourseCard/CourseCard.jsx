@@ -13,9 +13,9 @@ function CourseCard({ courseName, courseDuration, keySkills }) {
           <p> Duration: 120 Minutes </p>
           <p> Key Skills: </p>
           <div className="skills">
-            <SkillBubble skillName="Django"></SkillBubble>
-            <SkillBubble skillName="Python"></SkillBubble>
-            <SkillBubble skillName="SQLAlchemy"></SkillBubble>
+            {keySkills.map((skill) => (
+              <SkillBubble skillName={skill}></SkillBubble>
+            ))}
           </div>
         </div>
         <div>
