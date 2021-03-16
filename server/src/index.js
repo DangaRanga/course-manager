@@ -33,12 +33,12 @@ app.use("/api/employee", employeeRouter);
 app.use("/api/course", courseRouter);
 
 // Connect to the react frontend
-app.use(express.static(path.join(__dirname, "../../client/build")));
+// app.use(express.static(path.join(__dirname, "../../client/build")));
 
 // Catch all route to serve the index.html file
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
+// app.get("*", (req, res) => {
+// res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
