@@ -14,13 +14,13 @@ export async function registerEmployee(e, formObj) {
   try {
     // Register user
     await axios.post(
-      "http://localhost:5010/api/employee/register",
+      "https://course-manager-backend.herokuapp.com/api/employee/register",
       newEmployee
     );
 
     // Log in user
     const loginResponse = await axios.post(
-      "http://localhost:5010/api/employee/login",
+      "https://course-manager-backend.herokuapp.com/api/employee/login",
       {
         email: email,
         passsword: password,
@@ -34,7 +34,7 @@ export async function registerEmployee(e, formObj) {
       user: loginResponse.data.user,
     };
   } catch (err) {
-    console.log(err.response.data.msg);
+    console.log(err);
   }
 }
 
