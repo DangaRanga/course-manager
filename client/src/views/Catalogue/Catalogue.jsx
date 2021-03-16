@@ -25,7 +25,7 @@ function Catalogue() {
   const [loading, setLoading] = useState(true);
   const history = useHistory();
   const { userData } = useContext(UserContext);
-  const { courses, setCourses } = useContext(CourseContext);
+  const { courses } = useContext(CourseContext);
 
   // Toggle the loading spinner while the context is loaded
   useEffect(() => {

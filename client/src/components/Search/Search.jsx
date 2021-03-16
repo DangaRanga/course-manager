@@ -1,5 +1,5 @@
 // React imports
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 
 // Context imports
 import { CourseContext } from "../../context/CourseContext";
@@ -8,10 +8,11 @@ import { CourseContext } from "../../context/CourseContext";
 import "./Search.css";
 
 function Search() {
-  const { courses, setCourses } = useContext(CourseContext);
+  // const { courses, setCourses } = useContext(CourseContext);
   const [search, setSearch] = useState("");
-  const [filteredCourses, setFilteredCourses] = useState([]);
+  // const [filteredCourses, setFilteredCourses] = useState([]);
 
+  console.log(search);
   return (
     <div>
       <input
