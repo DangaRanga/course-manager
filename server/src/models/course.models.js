@@ -21,8 +21,7 @@ const CourseSchema = new Schema({
   },
 
   duration: {
-    hours: Number,
-    minutes: Number,
+    type: String,
   },
 
   comments: [{ body: String, date: Date, rating: Number }],
@@ -33,7 +32,11 @@ const CourseSchema = new Schema({
     required: true,
   },
 
-  keySkills: [String],
+  keySkills: {
+    type: [String],
+    required: true,
+    default: [],
+  },
 
   finished: {
     type: Boolean,

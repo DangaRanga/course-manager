@@ -1,6 +1,7 @@
 // Imports
 const express = require("express");
 const Course = require("../models/course.models");
+const CourseController = require("../controllers/course.controllers");
 const { queryHandler } = require("../util/handlers.util");
 
 // Initialize express router
@@ -8,34 +9,27 @@ const courseRouter = express.Router();
 
 // Find all courses
 courseRouter.get("/", (request, response, next) => {
-  Course.find((err, courses) => queryHandler(err, courses, next, response));
+  CourseController.getCourses(request, response, next);
 });
 
 // Find course by name
 courseRouter.get("/course/:title", (request, response, next) => {
-  Course.find(request.params.title, queryHandler(err, course, next, response));
+  CourseController.getCourse(request, response, next);
 });
 
 // Create course
 courseRouter.post("/create", (request, response, next) => {
-  Course.create(request.body, queryHandler(err, course, next, response));
+  CourseController.createCourse(request, response, next);
 });
 
 // Update Course
 courseRouter.put("/:id", (request, response, next) => {
-  Course.updateOne(
-    request.params.id,
-    { _id: request.params.id },
-    { keySkills: request.body }
-  );
+  CourseController.updateCourse(request, response, next);
 });
 
 // Delete Course
 courseRouter.delete("/:id", (request, response, next) => {
-  Course.findByIdAndRemove(
-    request.body.id,
-    queryHandler(err, course, next, response)
-  );
+  CourseController.deleteCourse(request, response, next);
 });
 
 module.exports = courseRouter;

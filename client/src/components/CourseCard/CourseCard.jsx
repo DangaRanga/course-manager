@@ -10,7 +10,7 @@ function CourseCard({ courseName, courseDuration, keySkills, externalUrl }) {
       <div className="course-flex-wrapper">
         <div className="course-details">
           <h2> {courseName}</h2>
-          <p> Duration: 120 Minutes </p>
+          <p> Duration: {courseDuration} </p>
           <p> Key Skills: </p>
           <div className="skills">
             {keySkills.map((skill) => (

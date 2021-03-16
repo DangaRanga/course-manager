@@ -51,6 +51,7 @@ function Profile() {
                   courseName={course.title}
                   keySkills={course.keySkills}
                   externalUrl={course.externalUrl}
+                  courseDuration={course.duration}
                 ></CourseCard>
               ))}
             </div>

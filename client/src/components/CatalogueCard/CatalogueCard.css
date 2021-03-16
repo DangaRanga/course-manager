@@ -17,6 +17,10 @@
   margin: 15px 0;
 }
 
+.catalogue-course-details {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .course-desc {
   color: #000000;
 }

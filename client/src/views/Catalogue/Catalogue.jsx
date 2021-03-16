@@ -53,9 +53,10 @@ function Catalogue() {
                   courseName={course.title}
                   description={course.description}
                   keySkills={course.keySkills}
+                  courseDuration={course.duration}
                   onClick={() => {
                     let userCourses = userData.user.coursesInProgress;
-                    if (objectInArray(userCourses, courses) === false) {
+                    if (objectInArray(userCourses, course) === false) {
                       userCourses.push(course);
                       updateEmployeeCourses(userCourses, userData);
                     }
