@@ -1,8 +1,8 @@
 // React imports
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 // Context imports
-import { CourseContext } from "../../context/CourseContext";
+// import { CourseContext } from "../../context/CourseContext";
 
 // CSS and image imports
 import "./Search.css";
