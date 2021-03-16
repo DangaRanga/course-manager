@@ -1,9 +1,11 @@
+// React imports
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
+// Component Imports
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-// Import Views/Pages
+// View/Page imports
 import Auth from "../../views/Auth/Auth";
 import Profile from "../../views/Profile/Profile";
 import Catalogue from "../../views/Catalogue/Catalogue";

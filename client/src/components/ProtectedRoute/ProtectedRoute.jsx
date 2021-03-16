@@ -1,9 +1,9 @@
 // React imports
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import Nav from "../Nav/Nav";
 
 // User module imports
+import Nav from "../Nav/Nav";
 
 function ProtectedRoute({ component: Component, ...rest }) {
   return (

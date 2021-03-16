@@ -1,0 +1,10 @@
+#search-box {
+  background: url("../../assets/icons/search-gray.svg") no-repeat scroll 7px;
+  background-size: contain;
+  padding: 8px 15px;
+  padding-left: 3.2em;
+  width: 100%;
+  border: 2px solid #c4c4c4;
+  border-radius: 5px;
+  outline: none;
+}

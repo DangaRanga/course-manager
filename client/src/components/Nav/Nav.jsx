@@ -2,6 +2,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Component Imports
+import Search from "../Search/Search";
+
 // CSS and Asset imports
 import logo from "../../assets/icons/logo.svg";
 import "./Nav.css";
@@ -11,7 +14,10 @@ function Nav() {
     <div id="nav-wrapper">
       <nav>
         <img src={logo} alt="logo" className="logo" />
-        <div id="search"> Search Component </div>
+        <div id="search">
+          {" "}
+          <Search />
+        </div>
         <ul className="nav-items">
           <Link to="/profile">
             <li> My Home</li>

@@ -14,6 +14,7 @@ function EmployeeContext({ children }) {
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token");
 
+      // If no token is found, the token is set to an empty string
       if (token === null) {
         localStorage.setItem("auth-token", "");
         token = "";
@@ -30,6 +31,7 @@ function EmployeeContext({ children }) {
           }
         );
       } catch (error) {
+        // If the token is invalid the user is redirected to the auth page
         localStorage.setItem("auth-token", "");
         token = "";
         return <Redirect to="/auth"></Redirect>;
@@ -38,7 +40,6 @@ function EmployeeContext({ children }) {
       // Retrieve user if the token is valid
       let userResponse = {};
       if (tokenResponse.data.isValidToken) {
-        console.log(tokenResponse.data);
         userResponse = await axios.get("http://localhost:5010/api/employee", {
           headers: { "x-access-token": token },
         });

@@ -13,6 +13,7 @@ import { CourseContext } from "../../context/CourseContext";
 
 // Utility imports
 import { updateEmployeeCourses } from "../../util/data-fetching";
+import { objectInArray } from "../../util/data-processing";
 
 // CSS and image imports
 import "./Catalogue.css";
@@ -54,7 +55,7 @@ function Catalogue() {
                   keySkills={course.keySkills}
                   onClick={() => {
                     let userCourses = userData.user.coursesInProgress;
-                    if (userCourses.indexOf(course) === -1) {
+                    if (objectInArray(userCourses, courses) === false) {
                       userCourses.push(course);
                       updateEmployeeCourses(userCourses, userData);
                     }
