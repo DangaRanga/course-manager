@@ -135,6 +135,7 @@ const EmployeeController = {
       email: employee.email,
       id: employee.id,
       coursesCompleted: employee.coursesCompleted,
+      coursesInProgress: employee.coursesInProgress,
     });
   },
 
@@ -146,7 +147,15 @@ const EmployeeController = {
 
   deleteEmployee() {},
 
-  updateEmployee(request, response) {},
+  async updateEmployee(request, response) {
+    console.log(request.body);
+    await Employee.updateOne(
+      { _id: request.params.id },
+      {
+        coursesInProgress: request.body.coursesInProgress,
+      }
+    );
+  },
 };
 
 module.exports = EmployeeController;

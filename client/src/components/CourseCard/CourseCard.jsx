@@ -4,7 +4,7 @@ import "./CourseCard.css";
 
 import SkillBubble from "../SkillBubble/SkillBubble";
 
-function CourseCard({ courseName, courseDuration, keySkills }) {
+function CourseCard({ courseName, courseDuration, keySkills, externalUrl }) {
   return (
     <div className="course-card-container">
       <div className="course-flex-wrapper">
@@ -19,7 +19,9 @@ function CourseCard({ courseName, courseDuration, keySkills }) {
           </div>
         </div>
         <div>
-          <button className="btn course-btn"> Continue Learning </button>
+          <a href={externalUrl}>
+            <button className="btn course-btn"> Continue Learning </button>
+          </a>
         </div>
       </div>
     </div>

@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 import CourseSidePanel from "../../components/CourseSidePanel/CourseSidePanel";
 import CatalogueCard from "../../components/CatalogueCard/CatalogueCard";
 import axios from "axios";
@@ -9,7 +11,9 @@ const skills = ["Javascript", "Python", "Potatoes"];
 
 function Catalogue() {
   const [courses, setCourses] = useState([]);
-
+  const history = useHistory();
+  const { userData } = useContext(UserContext);
+  console.log(userData);
   useEffect(() => {
     let courses = {};
     const fetchCourses = async () => {
@@ -24,6 +28,17 @@ function Catalogue() {
     fetchCourses();
   }, []);
 
+  const updateEmployeeCourses = async (userCourses) => {
+    let user = userData.user;
+    try {
+      let response = await axios.put(
+        `http://localhost:5010/api/employee/${userData.user.id}`,
+        { coursesInProgress: userCourses }
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <div id="course-catalogue-container">
       <CourseSidePanel />
@@ -35,6 +50,14 @@ function Catalogue() {
               courseName={course.title}
               description={course.description}
               keySkills={course.keySkills}
+              onClick={() => {
+                let userCourses = userData.user.coursesInProgress;
+                if (userCourses.indexOf(course) === -1) {
+                  userCourses.push(course);
+                }
+                updateEmployeeCourses(userCourses);
+                history.push("/");
+              }}
             />
           ))}
           <CatalogueCard

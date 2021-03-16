@@ -3,7 +3,13 @@ import SkillBubble from "../SkillBubble/SkillBubble";
 
 import "./CatalogueCard.css";
 
-function CatalogueCard({ courseName, courseDuration, description, keySkills }) {
+function CatalogueCard({
+  courseName,
+  courseDuration,
+  description,
+  keySkills,
+  onClick,
+}) {
   return (
     <div className="catalogue-card-wrapper">
       <div className="catalogue-card-container">
@@ -23,7 +29,10 @@ function CatalogueCard({ courseName, courseDuration, description, keySkills }) {
       </div>
       <hr className="catalogue-separator" />
       <div className="btn-flex-wrapper">
-        <button className="btn course-btn"> Start Course </button>
+        <button className="btn course-btn" onClick={onClick}>
+          {" "}
+          Start Course{" "}
+        </button>
       </div>
     </div>
   );

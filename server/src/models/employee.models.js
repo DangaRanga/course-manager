@@ -34,12 +34,12 @@ const EmployeeSchema = new Schema({
   },
 
   coursesInProgress: {
-    type: [String],
+    type: [Object],
     default: [],
   },
 
   coursesCompleted: {
-    type: [String],
+    type: [Object],
     default: [],
   },
 
