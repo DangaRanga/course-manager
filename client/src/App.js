@@ -5,14 +5,17 @@ import { BrowserRouter as Router } from "react-router-dom";
 // User module imports
 import RouteClient from "./components/RouteClient/RouteClient";
 import EmployeeContext from "./context/UserContext";
+import CoursesContext from "./context/CourseContext";
 import "./App.css";
 
 function App() {
   return (
     <Router>
-      <EmployeeContext>
-        <RouteClient />
-      </EmployeeContext>
+      <CoursesContext>
+        <EmployeeContext>
+          <RouteClient />
+        </EmployeeContext>
+      </CoursesContext>
     </Router>
   );
 }

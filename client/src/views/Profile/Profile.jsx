@@ -1,22 +1,24 @@
+// React imports
 import React, { useContext, useEffect, useState } from "react";
 
-import { UserContext } from "../../context/UserContext";
+// Component imports
 import CourseCard from "../../components/CourseCard/CourseCard";
 import Card from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/Spinner";
+
+import { UserContext } from "../../context/UserContext";
+
+// CSS and image imports
 import "./Profile.css";
 
-const skills = ["Javascript", "Python", "Potatoes"];
-
 function Profile() {
+  // Initializing key variables
   const [loading, setLoading] = useState(true);
   const { userData } = useContext(UserContext);
-  const user = userData.user;
-  console.log(userData);
   let userCourses = [];
   let coursesCompleted = [];
 
-  // Adjust the value of loading when the context updates
+  // Toggle the loading spinner while the context is loaded
   useEffect(() => {
     if (userData) {
       setLoading(false);
