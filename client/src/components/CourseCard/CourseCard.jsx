@@ -20,7 +20,7 @@ function CourseCard({ courseName, courseDuration, keySkills, externalUrl }) {
         </div>
         <div>
           <a href={externalUrl}>
-            <button className="btn course-btn"> Continue Learning </button>
+            <button className="btn course-btn"> Launch Course </button>
           </a>
         </div>
       </div>

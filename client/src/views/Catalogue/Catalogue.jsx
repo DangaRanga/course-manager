@@ -18,8 +18,6 @@ import { objectInArray } from "../../util/data-processing";
 // CSS and image imports
 import "./Catalogue.css";
 
-const skills = ["Javascript", "Python", "Potatoes"];
-
 function Catalogue() {
   // Initializing key variables
   const [loading, setLoading] = useState(true);
@@ -64,11 +62,6 @@ function Catalogue() {
                   }}
                 />
               ))}
-              <CatalogueCard
-                courseName="Introduction to Next.js"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                keySkills={skills}
-              />
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 // React imports
 import React, { useState, useContext } from "react";
+import Select from "react-select";
 import { useHistory } from "react-router-dom";
 
 // User module imports
@@ -10,7 +11,14 @@ import { registerEmployee, loginEmployee } from "../../util/auth-handler";
 import book from "../../assets/icons/Book.svg";
 import "./Form.css";
 
+// Styling react select
 function Form() {
+  const options = [
+    { label: "Web Development", value: "development" },
+    { label: "Graphic Design", value: "design" },
+    { label: "Video Production", value: "video" },
+    { label: "Digital Advertising", value: "social media" },
+  ];
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
   const [formState, setFormState] = useState({
@@ -41,6 +49,7 @@ function Form() {
       <form onSubmit={submit}>
         <input
           value={formState.email}
+          required
           onChange={(e) =>
             setFormState({
               ...formState,
@@ -54,6 +63,7 @@ function Form() {
           <div>
             <input
               value={formState.firstName}
+              required
               onChange={(e) =>
                 setFormState({
                   ...formState,
@@ -66,21 +76,23 @@ function Form() {
 
             <input
               value={formState.lastName}
+              required
               onChange={(e) =>
                 setFormState({ ...formState, lastName: e.target.value })
               }
               type="text"
               placeholder="Last Name"
             />
-
-            <input
-              value={formState.department}
-              onChange={(e) =>
-                setFormState({ ...formState, department: e.target.value })
-              }
-              type="text"
-              placeholder="Department"
-            />
+            <Select
+              className="custom-select"
+              options={options}
+              onChange={(e) => {
+                setFormState({ ...formState, department: e.value });
+              }}
+              components={{
+                IndicatorSeparator: () => null,
+              }}
+            ></Select>
           </div>
         )}
         <input
