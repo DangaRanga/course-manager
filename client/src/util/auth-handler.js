@@ -17,22 +17,6 @@ export async function registerEmployee(e, formObj) {
       "https://course-manager-backend.herokuapp.com/api/employee/register",
       newEmployee
     );
-
-    // Log in user
-    const loginResponse = await axios.post(
-      "https://course-manager-backend.herokuapp.com/api/employee/login",
-      {
-        email: email,
-        passsword: password,
-      }
-    );
-
-    // Store the auth token
-    localStorage.setItem("auth-token", loginResponse.data.authToken);
-    return {
-      token: loginResponse.data.authToken,
-      user: loginResponse.data.user,
-    };
   } catch (err) {
     console.log(err);
   }

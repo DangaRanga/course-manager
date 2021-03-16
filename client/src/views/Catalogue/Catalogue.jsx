@@ -34,6 +34,13 @@ function Catalogue() {
     }
   }, [courses]);
 
+  // Try Catch to allow context to load in
+  try {
+    console.log(courses);
+  } catch (err) {
+    console.log("Loading Context");
+  }
+
   return (
     <div>
       {loading ? (

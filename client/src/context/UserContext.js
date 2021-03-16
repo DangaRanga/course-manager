@@ -24,7 +24,7 @@ function EmployeeContext({ children }) {
       let tokenResponse = {};
       try {
         tokenResponse = await axios.post(
-          "https://course-manager-backend.herokuapp.com/employee/checkToken",
+          "https://course-manager-backend.herokuapp.com/api/employee/checkToken",
           null,
           {
             headers: { "x-access-token": token },
