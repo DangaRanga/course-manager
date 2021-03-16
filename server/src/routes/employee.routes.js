@@ -30,4 +30,7 @@ employeeRouter.post("/checkToken", async (request, response, next) => {
 employeeRouter.put("/:id", async (request, response) => {
   EmployeeController.updateEmployee(request, response);
 });
+
+employeeRouter.delete("/id", async (request, response) => {});
+
 module.exports = employeeRouter;
