@@ -40,6 +40,9 @@ app.use("/api/course", courseRouter);
 // res.sendFile(path.join(__dirname, "../client/build/index.html"));
 // });
 
+app.get("/", (request, response) => {
+  response.send("API is functional.");
+});
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
