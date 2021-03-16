@@ -20,3 +20,5 @@ const auth = (request, response, next) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+module.exports = { auth: auth };

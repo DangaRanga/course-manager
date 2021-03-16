@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
 
+import { UserContext } from "../../context/UserContext";
 import CourseCard from "../../components/CourseCard/CourseCard";
 import Card from "../../components/Card/Card";
-
 import "./Profile.css";
+
 const skills = ["Javascript", "Python", "Potatoes"];
+
 function Profile() {
+  const [userDetails, setUserDetails] = useState({});
+  const { userData } = useContext(UserContext);
+  console.log(userData);
   return (
     <div id="profile-content-container">
       <h1 id="profile-header"> My Courses </h1>

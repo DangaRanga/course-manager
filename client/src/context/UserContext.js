@@ -38,9 +38,12 @@ function EmployeeContext({ children }) {
       // Retrieve user if the token is valid
       let userResponse = {};
       if (tokenResponse.data.isValidToken) {
+        console.log(tokenResponse.data);
         userResponse = await axios.get("http://localhost:5010/api/employee", {
           headers: { "x-access-token": token },
         });
+      } else {
+        localStorage.setItem("auth-token", "");
       }
 
       setUserData({

@@ -4,11 +4,11 @@ const express = require("express");
 // User defined imports
 const Employee = require("../models/employee.models");
 const EmployeeController = require("../controllers/employee.controllers");
-const { queryHandler } = require("../util/handlers.util");
+const { auth } = require("../util/auth.util");
 
 const employeeRouter = express.Router();
 
-employeeRouter.get("/", (request, response, next) => {
+employeeRouter.get("/", auth, async (request, response, next) => {
   EmployeeController.getEmployee(request, response);
 });
 employeeRouter.get("/all", (request, response, next) => {

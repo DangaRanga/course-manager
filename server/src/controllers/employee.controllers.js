@@ -64,7 +64,6 @@ const EmployeeController = {
     // Check if the user exists
     try {
       const user = await Employee.findOne({ email: email });
-
       if (!user) {
         return response
           .status(400)
@@ -85,7 +84,12 @@ const EmployeeController = {
       });
       return response.status(200).json({
         authToken: token,
-        user: { id: user._id, email: user.email },
+        user: {
+          id: user._id,
+          email: user.email,
+          coursesInProgress: user.coursesInProgress,
+          coursesCompleted: user.coursesCompleted,
+        },
       });
     } catch (err) {
       return response.status(500).json({ error: err.message });
@@ -125,7 +129,14 @@ const EmployeeController = {
     }
   },
 
-  async getEmployee(auth, request, response) {},
+  async getEmployee(request, response) {
+    const employee = await Employee.findById(request.user);
+    response.json({
+      email: employee.email,
+      id: employee.id,
+      coursesCompleted: employee.coursesCompleted,
+    });
+  },
 
   getEmployees(request, response, next) {
     Employee.find((err, employees) =>
