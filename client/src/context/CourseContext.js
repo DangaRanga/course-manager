@@ -10,7 +10,9 @@ function CoursesContext({ children }) {
     let courses = {};
     const fetchCourses = async () => {
       try {
-        courses = await axios.get("http://localhost:5010/api/course");
+        courses = await axios.get(
+          "https://course-manager-backend.herokuapp.com/api/course"
+        );
       } catch (err) {
         console.error(err);
       }

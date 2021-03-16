@@ -24,7 +24,7 @@ function EmployeeContext({ children }) {
       let tokenResponse = {};
       try {
         tokenResponse = await axios.post(
-          "http://localhost:5010/api/employee/checkToken",
+          "https://course-manager-backend.herokuapp.com/employee/checkToken",
           null,
           {
             headers: { "x-access-token": token },
@@ -40,9 +40,12 @@ function EmployeeContext({ children }) {
       // Retrieve user if the token is valid
       let userResponse = {};
       if (tokenResponse.data.isValidToken) {
-        userResponse = await axios.get("http://localhost:5010/api/employee", {
-          headers: { "x-access-token": token },
-        });
+        userResponse = await axios.get(
+          "https://course-manager-backend.herokuapp.com/api/employee",
+          {
+            headers: { "x-access-token": token },
+          }
+        );
       } else {
         localStorage.setItem("auth-token", "");
       }

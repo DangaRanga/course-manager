@@ -44,7 +44,7 @@ export async function loginEmployee(e, formObj) {
   try {
     // Attempt to log user in
     const loginResponse = await axios.post(
-      "http://localhost:5010/api/employee/login",
+      "https://course-manager-backend.herokuapp.com/api/employee/login",
       {
         email: email,
         password: password,
