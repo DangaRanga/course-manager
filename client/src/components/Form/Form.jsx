@@ -4,6 +4,7 @@ import Select from "react-select";
 import { useHistory } from "react-router-dom";
 
 // User module imports
+import { FormField } from "./FormField";
 import { UserContext } from "../../context/UserContext";
 import { registerEmployee, loginEmployee } from "../../util/auth-handler";
 
@@ -47,23 +48,21 @@ function Form() {
       <img src={book} alt="book" id="form-img"></img>
       <h1>{formState.login ? "Login" : "Sign Up"} </h1>
       <form onSubmit={submit}>
-        <input
+        <FormField
           value={formState.email}
-          required
           onChange={(e) =>
             setFormState({
               ...formState,
               email: e.target.value,
             })
-          } //
+          }
           type="email"
-          placeholder="Email"
+          name="Email Address"
         />
         {!formState.login && (
           <div>
-            <input
+            <FormField
               value={formState.firstName}
-              required
               onChange={(e) =>
                 setFormState({
                   ...formState,
@@ -71,17 +70,15 @@ function Form() {
                 })
               }
               type="text"
-              placeholder="First Name"
+              name="First Name"
             />
-
-            <input
+            <FormField
               value={formState.lastName}
-              required
               onChange={(e) =>
                 setFormState({ ...formState, lastName: e.target.value })
               }
               type="text"
-              placeholder="Last Name"
+              name="Last Name"
             />
             <Select
               className="custom-select"
@@ -95,13 +92,13 @@ function Form() {
             ></Select>
           </div>
         )}
-        <input
+        <FormField
           value={formState.password}
           onChange={(e) =>
             setFormState({ ...formState, password: e.target.value })
           }
           type="password"
-          placeholder="Password"
+          name="Password"
         />
         <p id="auth-toggle">
           {formState.login ? "Don't have" : "Already have"} an account?{" "}

@@ -1,0 +1,49 @@
+#form-container input {
+  box-sizing: border-box;
+  margin: 10px 0;
+  border: solid 1px #cdcdcd;
+  padding: 12px 15px;
+  width: 100%;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+#form-container input:focus {
+  border: solid 1px #4fa3db;
+  box-shadow: 0 0 5px #4fa3db;
+  outline: none;
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field span {
+  padding: 21px 20px;
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: 0.5s;
+  transition-timing-function: ease;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  opacity: 0.5;
+  font-size: 0.9em;
+}
+
+.form-field input:focus + span,
+.form-field input:not(:placeholder-shown) + span {
+  opacity: 0.7;
+  transform: scale(0.75) translateY(-75%) translateX(-40px);
+}
+
+/* For IE Browsers*/
+.form-field input:focus + span,
+.form-field input:not(:-ms-input-placeholder) + span {
+  opacity: 0.7;
+  transform: scale(0.75) translateY(-80%) translateX(-50px);
+}

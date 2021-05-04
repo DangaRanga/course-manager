@@ -16,28 +16,10 @@
   flex-direction: column;
 }
 
-#form-container input {
-  box-sizing: border-box;
-  margin: 10px 0;
-  border: solid 1px #cdcdcd;
-  padding: 12px 15px;
-  width: 100%;
-  border-radius: 8px;
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-}
-
-#form-container input:focus {
-  border: solid 1px #4fa3db;
-  box-shadow: 0 0 5px #4fa3db;
-  outline: none;
-}
 #form-container h1 {
   margin-bottom: 10px;
 }
+
 .form-btn {
   width: 40%;
   padding: 14px 8px;
@@ -55,6 +37,7 @@
   font-weight: bold;
   margin: 10px;
 }
+
 #form-toggle {
   color: #016fb9;
 }
