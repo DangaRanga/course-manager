@@ -12,7 +12,7 @@ import { UserContext } from "../../context/UserContext";
 import { CourseContext } from "../../context/CourseContext";
 
 // Utility imports
-import { updateEmployeeCourses } from "../../util/data-fetching";
+import { updateEmployeeCourses, fetchCourses } from "../../util/data-fetching";
 import { objectInArray } from "../../util/data-processing";
 
 // CSS and image imports
@@ -21,18 +21,19 @@ import "./Catalogue.css";
 function Catalogue() {
   // Initializing key variables
   const [loading, setLoading] = useState(true);
+  const [courses, setCourses] = useState([]);
   const history = useHistory();
   const { userData } = useContext(UserContext);
-  const { courses } = useContext(CourseContext);
-
   // Toggle the loading spinner while the context is loaded
+
   useEffect(() => {
-    if (courses) {
+    const updateCourses = async () => {
+      let fetchedCourses = await fetchCourses();
+      setCourses(fetchedCourses);
       setLoading(false);
-    } else {
-      setLoading(true);
-    }
-  }, [courses]);
+    };
+    updateCourses();
+  }, []);
 
   // Try Catch to allow context to load in
   try {

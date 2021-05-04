@@ -100,6 +100,7 @@ function Form() {
           type="password"
           name="Password"
         />
+        {/* Toggle between Login and Signup */}
         <p id="auth-toggle">
           {formState.login ? "Don't have" : "Already have"} an account?{" "}
           <span

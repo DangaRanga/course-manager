@@ -11,3 +11,11 @@ export async function updateEmployeeCourses(userCourses, userData) {
     console.error(err);
   }
 }
+
+export async function fetchCourses() {
+  return await axios
+    .get("https://course-manager-backend.herokuapp.com/api/course")
+    .then((response) => {
+      return response.data;
+    });
+}

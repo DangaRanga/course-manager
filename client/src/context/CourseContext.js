@@ -20,7 +20,7 @@ function CoursesContext({ children }) {
     };
 
     fetchCourses();
-  });
+  }, [courses]);
 
   return (
     <CourseContext.Provider value={{ courses, setCourses }}>
