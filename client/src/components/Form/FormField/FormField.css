@@ -1,6 +1,6 @@
 #form-container input {
   box-sizing: border-box;
-  margin: 10px 0;
+  margin: 14px 0;
   border: solid 1px #cdcdcd;
   padding: 12px 15px;
   width: 100%;
@@ -23,7 +23,7 @@
 }
 
 .form-field span {
-  padding: 21px 20px;
+  padding: 24px 20px;
   pointer-events: none;
   position: absolute;
   left: 0;
@@ -38,12 +38,16 @@
 .form-field input:focus + span,
 .form-field input:not(:placeholder-shown) + span {
   opacity: 0.7;
-  transform: scale(0.75) translateY(-75%) translateX(-40px);
+  transform: scale(0.75) translateY(-65%) translateX(-40px);
+  color: #016fb9;
+  font-weight: bold;
 }
 
 /* For IE Browsers*/
 .form-field input:focus + span,
 .form-field input:not(:-ms-input-placeholder) + span {
   opacity: 0.7;
-  transform: scale(0.75) translateY(-80%) translateX(-50px);
+  transform: scale(0.75) translateY(-65%) translateX(-50px);
+  color: #016fb9;
+  font-weight: bold;
 }

@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import Search from "../Search/Search";
 
 // CSS and Asset imports
-import logo from "../../assets/icons/logo.svg";
+import Logo from "../../assets/icons/Logo.svg";
 import "./Nav.css";
 
 function Nav() {
   return (
     <div id="nav-wrapper">
       <nav>
-        <img src={logo} alt="logo" className="logo" />
+        <img src={Logo} alt="logo" className="logo" />
         <div id="search">
           {" "}
           <Search />

@@ -6,10 +6,14 @@ import { useHistory } from "react-router-dom";
 // User module imports
 import { FormField } from "./FormField";
 import { UserContext } from "../../context/UserContext";
-import { registerEmployee, loginEmployee } from "../../util/auth-handler";
+import {
+  registerEmployee,
+  loginEmployee,
+  handleLogin,
+} from "../../util/auth-handler";
 
 // CSS and image imports
-import book from "../../assets/icons/Book.svg";
+import Logo from "../../assets/icons/Logo.svg";
 import "./Form.css";
 
 // Styling react select
@@ -31,21 +35,42 @@ function Form() {
     password: "",
   });
 
+  const [error, setError] = useState("");
+
   const submit = async (e) => {
     // Update the user context on submit
-    let userData = {};
+    e.preventDefault();
+    let data = {};
     if (formState.login) {
-      userData = await loginEmployee(e, formState);
+      // Log user in and fetch details
+      data = await loginEmployee(formState);
+
+      // Display errors if there are any
+      if (data.error) {
+        setError(data.error);
+      } else {
+        // Remove errors if there are none
+        setError("");
+        const userData = handleLogin(data);
+
+        // Redirect to home
+        history.push("/");
+
+        // Update Context
+        setUserData(userData);
+      }
     } else {
-      userData = await registerEmployee(e, formState);
+      await registerEmployee(formState);
+      history.push("/");
     }
-    setUserData(userData);
-    history.push("/");
+    console.log(data);
+
+    //
   };
 
   return (
     <div id="form-container">
-      <img src={book} alt="book" id="form-img"></img>
+      <img src={Logo} alt="Logo" id="form-img"></img>
       <h1>{formState.login ? "Login" : "Sign Up"} </h1>
       <form onSubmit={submit}>
         <FormField
@@ -119,6 +144,7 @@ function Form() {
           {" "}
           {formState.login ? "Login" : "Sign Up"}
         </button>
+        {error ? <div className="error"> {error}</div> : ""}
       </form>
     </div>
   );

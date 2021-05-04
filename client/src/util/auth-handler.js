@@ -1,39 +1,91 @@
-import axios from "axios";
+import { toast } from "react-toastify";
 
-export async function registerEmployee(e, formObj) {
-  e.preventDefault();
+const API_ENDPOINT = "http://localhost:5010/api/employee";
+
+export async function registerEmployee(formObj) {
   // Destructure form fields
-  const { firstName, lastName, email, password, department } = formObj;
   const newEmployee = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    password: password,
-    department: department,
+    firstName: formObj.firstName,
+    lastName: formObj.lastName,
+    email: formObj.email,
+    password: formObj.password,
+    department: formObj.department,
   };
-  try {
-    // Register user
-    await axios.post(
-      "https://course-manager-backend.herokuapp.com/api/employee/register",
-      newEmployee
-    );
-  } catch (err) {
-    console.log(err);
-  }
+
+  // Initialize request
+  const requestParams = {
+    method: "POST",
+    body: JSON.stringify(newEmployee),
+  };
+
+  return fetch(`${API_ENDPOINT}/register`, requestParams).then((response) => {
+    if (!response.ok) {
+      // Error handling for when the user isn't authenticated
+      if (response.status === 401) {
+        return response.json();
+      }
+    } else {
+      return response.json();
+    }
+  });
 }
 
-export async function loginEmployee(e, formObj) {
-  e.preventDefault();
+/**
+ * Logs an Employee in
+ * @param {*} formObj
+ */
+export async function loginEmployee(formObj) {
+  // Destructure form fields
   const { email, password } = formObj;
+
+  // Initialize request
+  let requestParams = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+    }),
+  };
+
+  return await fetch(`${API_ENDPOINT}/login`, requestParams)
+    .then((response) => {
+      if (!response.ok) {
+        // Error handling for when the user isn't authenticated
+        if (response.status === 401 || response.status === 400) {
+          const errorResponse = response.json();
+          console.log(errorResponse);
+          return errorResponse;
+        }
+      } else {
+        const loginResponse = response.json();
+        return loginResponse;
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+export function handleLogin(loginResponse) {
+  // Store the JWT
+  localStorage.setItem("auth-token", loginResponse.authToken);
+
+  return {
+    token: loginResponse.authToken,
+    user: loginResponse.user,
+  };
+}
+/*
   try {
     // Attempt to log user in
-    const loginResponse = await axios.post(
-      "https://course-manager-backend.herokuapp.com/api/employee/login",
-      {
-        email: email,
-        password: password,
-      }
-    );
+    const loginResponse = await axios.post(`${API_ENDPOINT}/login`, {
+      email: email,
+      password: password,
+    });
     localStorage.setItem("auth-token", loginResponse.data.authToken);
     return {
       token: loginResponse.data.authToken,
@@ -42,6 +94,6 @@ export async function loginEmployee(e, formObj) {
   } catch (err) {
     console.log(err.response.data.msg);
   }
-}
+}*/
 
 export async function checkLoggedIn() {}

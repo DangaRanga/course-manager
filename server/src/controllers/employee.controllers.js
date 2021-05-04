@@ -15,14 +15,14 @@ const EmployeeController = {
     if (isEmpty) {
       return response
         .status(400)
-        .json({ message: "Not all fields have been set" });
+        .json({ error: "Not all fields have been set" });
     }
     try {
       // Check if the user already exists
       const userExists = await Employee.findOne({ email: email });
       if (userExists) {
         return response.status(400).json({
-          message: "An account with this email address already exists",
+          error: "An account with this email address already exists",
         });
       }
 
@@ -67,14 +67,14 @@ const EmployeeController = {
       if (!user) {
         return response
           .status(400)
-          .json({ message: "No user exists with the email entered" });
+          .json({ error: "No user exists with the email entered" });
       }
 
       // Check the password
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch) {
         return response.status(401).json({
-          message: "Invalid credentials",
+          error: "Invalid credentials",
         });
       }
 
@@ -83,6 +83,7 @@ const EmployeeController = {
         expiresIn: 900,
       });
       return response.status(200).json({
+        message: "User successfully logged in",
         authToken: token,
         user: {
           id: user._id,

@@ -9,7 +9,6 @@ import Spinner from "../../components/Spinner/Spinner";
 
 // Context imports
 import { UserContext } from "../../context/UserContext";
-import { CourseContext } from "../../context/CourseContext";
 
 // Utility imports
 import { updateEmployeeCourses, fetchCourses } from "../../util/data-fetching";
