@@ -1,5 +1,6 @@
 // React imports
 import React, { useContext, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 // Component imports
 import CourseCard from "../../components/CourseCard/CourseCard";
@@ -36,7 +37,11 @@ function Profile() {
   }
 
   return (
-    <div>
+    <motion.div
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+    >
       {loading ? (
         <div id="loader">
           <Spinner></Spinner>
@@ -69,7 +74,7 @@ function Profile() {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

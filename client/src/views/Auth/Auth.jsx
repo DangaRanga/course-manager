@@ -1,5 +1,6 @@
 // React imports
 import React from "react";
+import { motion } from "framer-motion";
 
 // Component imports
 import Form from "../../components/Form/Form";
@@ -9,9 +10,14 @@ import "./Auth.css";
 
 function Auth() {
   return (
-    <div id="auth-page">
+    <motion.div
+      id="auth-page"
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+    >
       <Form></Form>
-    </div>
+    </motion.div>
   );
 }
 

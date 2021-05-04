@@ -25,7 +25,15 @@ function Nav() {
           <Link to="/courses">
             <li> Courses </li>
           </Link>
-          <div id="profile-icon"></div>
+          <Link to="/">
+            <li
+              onClick={(e) => {
+                localStorage.removeItem("auth-token");
+              }}
+            >
+              Logout
+            </li>
+          </Link>
         </ul>
       </nav>
     </div>

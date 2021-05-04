@@ -1,5 +1,3 @@
-import { toast } from "react-toastify";
-
 const API_ENDPOINT = "http://localhost:5010/api/employee";
 
 export async function registerEmployee(formObj) {
@@ -79,21 +77,5 @@ export function handleLogin(loginResponse) {
     user: loginResponse.user,
   };
 }
-/*
-  try {
-    // Attempt to log user in
-    const loginResponse = await axios.post(`${API_ENDPOINT}/login`, {
-      email: email,
-      password: password,
-    });
-    localStorage.setItem("auth-token", loginResponse.data.authToken);
-    return {
-      token: loginResponse.data.authToken,
-      user: loginResponse.data.user,
-    };
-  } catch (err) {
-    console.log(err.response.data.msg);
-  }
-}*/
 
 export async function checkLoggedIn() {}
